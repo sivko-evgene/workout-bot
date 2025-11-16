@@ -1,18 +1,16 @@
-from flask import Flask
 import os
-import time
+import asyncio
+from telegram.ext import Application
 
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "🤖 Workout Bot Base is running!"
-
-@app.route('/health')  
-def health():
-    return "✅ Healthy"
+async def main():
+    bot_token = os.getenv('BOT_TOKEN')
+    if not bot_token:
+        print("❌ BOT_TOKEN not set")
+        return
+    
+    application = Application.builder().token(bot_token).build()
+    print("✅ Bot initialized, starting polling...")
+    await application.run_polling()
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    print(f"🚀 Starting server on port {port}")
-    app.run(host='0.0.0.0', port=port)
+    asyncio.run(main())
