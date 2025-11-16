@@ -1,7 +1,18 @@
 # main.py
-print("✅ Bot is starting on Render...")
+import sys
+print("Python version:", sys.version)
+print("✅ Testing imports...")
 
-# Простой код чтобы проверить работу
-if __name__ == "__main__":
-    print("🚀 Application started successfully!")
-    # Бот пока не запускаем, просто проверяем что все работает
+try:
+    import setuptools
+    print("setuptools version:", setuptools.__version__)
+except Exception as e:
+    print("setuptools error:", e)
+
+try:
+    from telegram.ext import Application
+    print("✅ telegram-bot imported successfully")
+except Exception as e:
+    print("❌ telegram-bot import failed:", e)
+
+print("🚀 Render deployment test completed")
