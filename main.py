@@ -1,20 +1,18 @@
 # main.py
-import time
+from flask import Flask
 import os
 
-print("Python version check...")
+app = Flask(__name__)
 
-# Проверяем переменные окружения
-bot_token = os.getenv('BOT_TOKEN')
-supabase_url = os.getenv('SUPABASE_URL')
+@app.route('/')
+def home():
+    return "🤖 Workout Bot is running!"
 
-print("✅ Environment check:")
-print(f"BOT_TOKEN: {'✅ Set' if bot_token else '❌ Missing'}")
-print(f"SUPABASE_URL: {'✅ Set' if supabase_url else '❌ Missing'}")
+@app.route('/health')  
+def health():
+    return "✅ Healthy"
 
-print("🚀 Application is running...")
-
-# Бесконечный цикл чтобы приложение не закрывалось
-while True:
-    print("🤖 Bot service is alive...")
-    time.sleep(60)  # Ждет 60 секунд между сообщениями
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    print(f"🚀 Starting server on port {port}")
+    app.run(host='0.0.0.0', port=port)
