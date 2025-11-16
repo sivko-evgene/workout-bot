@@ -1,12 +1,12 @@
-# main.py
 from flask import Flask
 import os
+import time
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🤖 Workout Bot is running!"
+    return "🤖 Workout Bot Base is running!"
 
 @app.route('/health')  
 def health():
